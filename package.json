@@ -1,0 +1,23 @@
+{
+  "name": "videojs-mux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "dev": "npm run clean && node build.js --dev",
+    "build": "npm run clean && node build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hls.js": "^0.14.17",
+    "video.js": "^7.10.2"
+  },
+  "devDependencies": {
+    "chokidar": "^3.5.1",
+    "esbuild": "^0.8.32",
+    "lodash": "^4.17.20",
+    "serve-handler": "^6.1.3"
+  }
+}
