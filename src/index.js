@@ -1,12 +1,26 @@
-import videojs from "video.js/core";
-import { HlsSourceHandler } from "./hlsjs-tech.js";
+import videojs from 'video.js/core';
+import 'videojs-mux';
+import './plugins/vtt-thumbnails.js';
 
-var html5Tech = videojs.getTech && videojs.getTech("Html5");
-html5Tech =
-  html5Tech || (videojs.getComponent && videojs.getComponent("Html5"));
+import { HlsSourceHandler } from './mux-tech.js';
 
-if (html5Tech) {
-  html5Tech.registerSourceHandler(HlsSourceHandler, 0);
-}
+videojs.getTech('Html5').registerSourceHandler(HlsSourceHandler, 0);
+
+videojs.use('video/mux', player => {
+  return {
+    setSource(srcObj, next) {
+      const playbackId = srcObj.src;
+
+      player.vttThumbnails({
+        src: `https://image.mux.com/${playbackId}/storyboard.vtt`,
+      });
+
+      next(null, {
+        src: `https://stream.mux.com/${playbackId}`,
+        type: 'application/x-mpegurl',
+      });
+    }
+  }
+});
 
 export default videojs;

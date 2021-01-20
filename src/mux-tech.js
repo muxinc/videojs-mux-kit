@@ -1,27 +1,19 @@
 import Hls from "hls.js";
 
-/**
- * hls.js source handler
- * @param source
- * @param tech
- * @constructor
- */
-function Html5HlsJS(source, tech) {
-  var options = tech.options_;
-  var el = tech.el();
-  var duration = null;
-  var hls = (this.hls = new Hls(options.hlsjsConfig));
+import {muxRE, muxProtocolToUrl} from './mux-protocol';
 
-  /**
-   * creates an error handler function
-   * @returns {Function}
-   */
+function Html5HlsJS(source, tech) {
+  const options = tech.options_;
+  const el = tech.el();
+  let duration = null;
+  const hls = (this.hls = new Hls(options.hlsjsConfig));
+
   function errorHandlerFactory() {
-    var _recoverDecodingErrorDate = null;
-    var _recoverAudioCodecErrorDate = null;
+    const _recoverDecodingErrorDate = null;
+    const _recoverAudioCodecErrorDate = null;
 
     return function () {
-      var now = Date.now();
+      const now = Date.now();
 
       if (
         !_recoverDecodingErrorDate ||
@@ -43,12 +35,12 @@ function Html5HlsJS(source, tech) {
   }
 
   // create separate error handlers for hlsjs and the video tag
-  var hlsjsErrorHandler = errorHandlerFactory();
-  var videoTagErrorHandler = errorHandlerFactory();
+  const hlsjsErrorHandler = errorHandlerFactory();
+  const videoTagErrorHandler = errorHandlerFactory();
 
   // listen to error events coming from the video tag
   el.addEventListener("error", function (e) {
-    var mediaError = e.currentTarget.error;
+    const mediaError = e.currentTarget.error;
 
     if (mediaError.code === mediaError.MEDIA_ERR_DECODE) {
       videoTagErrorHandler();
@@ -95,7 +87,7 @@ function Html5HlsJS(source, tech) {
   });
 
   Object.keys(Hls.Events).forEach(function (key) {
-    var eventName = Hls.Events[key];
+    const eventName = Hls.Events[key];
     hls.on(eventName, function (event, data) {
       tech.trigger(eventName, data);
     });
@@ -118,13 +110,15 @@ function Html5HlsJS(source, tech) {
   hls.loadSource(source.src);
 }
 
-var hlsTypeRE = /^application\/(x-mpegURL|vnd\.apple\.mpegURL)$/i;
-var hlsExtRE = /\.m3u8/i;
+const hlsTypeRE = /^application\/(x-mpegURL|vnd\.apple\.mpegURL)$/i;
+const hlsExtRE = /\.m3u8/i;
 
-var HlsSourceHandler = {
+const HlsSourceHandler = {
   canHandleSource: function (source) {
     if (source.skipContribHlsJs) {
       return "";
+    } else if (muxRE.test(source.src)) {
+      return "probably";
     } else if (hlsTypeRE.test(source.type)) {
       return "probably";
     } else if (hlsExtRE.test(source.src)) {
@@ -134,6 +128,10 @@ var HlsSourceHandler = {
     }
   },
   handleSource: function (source, tech) {
+    const src = muxProtocolToUrl(source.src);
+
+    source.src = src;
+
     return new Html5HlsJS(source, tech);
   },
   canPlayType: function (type) {
