@@ -5,13 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const dev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    thumbnails: './src/with-thumbnails.js',
+  },
   mode: dev ? 'development' : 'production',
   watch: dev,
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'videojs-mux-kit.js',
-  },
   module: {
     rules: [
       {
@@ -31,6 +30,17 @@ module.exports = {
   },
   plugins: [
     new ESBuildPlugin(),
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new HtmlWebpackPlugin({
+      template: 'src/examples/index.html',
+      inject: true,
+      chunks: ['index'],
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/examples/index.html',
+      inject: true,
+      chunks: ['thumbnails'],
+      filename: 'thumbnails.html'
+    }),
   ],
 };
