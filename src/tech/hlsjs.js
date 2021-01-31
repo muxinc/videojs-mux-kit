@@ -6,8 +6,6 @@ class HlsJs {
   static hlsExtRE = /\.m3u8/i;
 
   constructor(source, tech, options = {}) {
-    console.log(source, tech, options);
-
     this.source = source;
     this.tech = tech;
     this.el = tech.el();
