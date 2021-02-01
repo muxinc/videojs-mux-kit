@@ -33,3 +33,8 @@ A full example, including Mux Data configuration:
 ```
 
 Of course, you can also initialize all of this via JS as well. If you want to include the thumbnail scrubber, include `thumbnailScubber: true` in your Video.js configuration
+
+## TODO
+
+- [ ] Player name to identify this player (need to configure that, but only if Data is user-configured)
+- [ ] Compare the bundle size to default Video.js
