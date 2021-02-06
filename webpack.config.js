@@ -1,13 +1,13 @@
 const path = require('path');
 const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const dev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: {
-    index: './src/index.js',
-    thumbnails: './src/with-thumbnails.js',
+    index: ['./src/index.js', './src/demo/preview.js', './src/demo/preview.scss'],
   },
   mode: dev ? 'development' : 'production',
   watch: dev,
@@ -16,6 +16,14 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'esbuild-loader',
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          dev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
@@ -31,16 +39,13 @@ module.exports = {
   plugins: [
     new ESBuildPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/examples/index.html',
+      template: 'src/demo/index.html',
       inject: true,
       chunks: ['index'],
-      filename: 'index.html'
+      filename: 'index.html',
     }),
-    new HtmlWebpackPlugin({
-      template: 'src/examples/index.html',
-      inject: true,
-      chunks: ['thumbnails'],
-      filename: 'thumbnails.html'
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
     }),
   ],
 };
