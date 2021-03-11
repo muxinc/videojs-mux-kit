@@ -1,12 +1,12 @@
 {
-  "name": "@muxinc/videojs",
+  "name": "@mux/videojs",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist",
     "dev": "webpack serve",
-    "webpack": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack"
   },
   "author": "",
   "license": "ISC",
