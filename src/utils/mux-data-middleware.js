@@ -21,4 +21,4 @@ export default function setupMuxDataTracking (player) {
 
   // start monitoring with videojs-mux
   return player.mux(options);
-}  
+}
