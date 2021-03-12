@@ -1,15 +1,14 @@
 import videojs from 'video.js/core';
-import 'videojs-mux';
 
 import './style/index.scss';
 
 import './plugins/vtt-thumbnails.js';
 import './tech/hlsjs';
+import setupMuxDataTracking from './utils/mux-data-middleware';
 
 videojs.use('video/mux', (player) => {
   return {
     setSource({ src }, next) {
-      console.log(player.options());
 
       if (player.options().thumbnailScrubber) {
         player.vttThumbnails({
@@ -21,8 +20,17 @@ videojs.use('video/mux', (player) => {
         src: `https://stream.mux.com/${src}`,
         type: 'application/x-mpegurl',
       });
+
+      if (player.options().muxData && player.options().muxData.data) {
+        setupMuxDataTracking(player);
+      }
     },
   };
 });
+
+// add videojs to the window so it can be used for other things
+if(window.videojs !== typeof('function')) {
+  window.videojs = videojs;
+}
 
 export default videojs;

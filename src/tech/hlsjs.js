@@ -10,6 +10,7 @@ class HlsJs {
     this.tech = tech;
     this.el = tech.el();
     this.hls = new Hls(options.hls);
+    this.Hls = Hls;
 
     this.setupEventHandlers();
     this.setupHls();
