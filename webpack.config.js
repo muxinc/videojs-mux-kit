@@ -2,7 +2,6 @@ const path = require('path');
 const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -47,9 +46,6 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
-    }),
-    new webpack.DefinePlugin({
-      package_version: JSON.stringify(process.env.npm_package_version),
     }),
   ],
 };
