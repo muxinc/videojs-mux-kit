@@ -21,7 +21,7 @@ videojs.use('video/mux', (player) => {
         type: 'application/x-mpegurl',
       });
 
-      if (player.options().muxData && player.options().muxData.data) {
+      if (player.mux && player.mux.addHLSJS) {
         setupMuxDataTracking(player);
       }
     },
