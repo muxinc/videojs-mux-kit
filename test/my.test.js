@@ -8,7 +8,7 @@ describe('React App', () => {
       const page = await context.newPage();
       await page.goto('http://localhost:8080/');
 
-      await page.screenshot({ path: `example-${browserType}.png` });
+      // await page.screenshot({ path: `example-${browserType}.png` });
 
       expect(await page.$eval("h1", el => el.textContent)).toEqual('Mux Video.js Kit(s)');
       
