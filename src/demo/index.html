@@ -27,7 +27,18 @@
         controls
         preload="auto"
         poster="https://image.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/thumbnail.jpg"
-        data-setup='{"thumbnailScrubber": true}'
+        data-setup='{
+          "thumbnailScrubber": true,
+          "plugins": {
+            "mux": {
+              "debug": true,
+              "data":{
+                "env_key": "ENV_KEY",
+                "video_title": "Mad Max"
+              }
+            }
+          }
+        }'
       >
         <source src="DS00Spx1CV902MCtPj5WknGlR102V5HFkDe" type="video/mux" />
       </video>
