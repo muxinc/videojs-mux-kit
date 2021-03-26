@@ -9,7 +9,7 @@
     "build": "NODE_ENV=production webpack",
     "test": "npm run test:integrations && npm run test:e2e",
     "test:integrations": "jest -c ./test/jest.config.js",
-    "test:e2e": "NODE_ENV=production DEBUG=pw:api jest -c ./test/jest.e2e.config.js"
+    "test:e2e": "NODE_ENV=production jest -c ./test/jest.e2e.config.js"
   },
   "author": "",
   "license": "ISC",

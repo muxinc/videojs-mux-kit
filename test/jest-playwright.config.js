@@ -11,10 +11,8 @@ module.exports = {
   serverOptions: {
     port,
     command: 'npm run dev',
-    // debug: true,
     launchTimeout: 180000,
     waitOnScheme: {
-      // verbose: true,
       resources: [`http://localhost:${port}`],
     },
   }

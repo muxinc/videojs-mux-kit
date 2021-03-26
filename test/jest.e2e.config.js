@@ -4,5 +4,5 @@ module.exports = {
   testEnvironment: 'node',
   preset: 'jest-playwright-preset',
   testMatch: ["**/e2e/**.test.js"],
-  testTimeout: 20000,
+  testTimeout: 30000,
 };
