@@ -7,7 +7,9 @@
     "clean": "rm -rf ./dist",
     "dev": "webpack serve",
     "build": "NODE_ENV=production webpack",
-    "test": "NODE_ENV=production jest -c ./test/jest.config.js"
+    "test": "npm run test:integrations && npm run test:e2e",
+    "test:integrations": "jest -c ./test/jest.config.js",
+    "test:e2e": "NODE_ENV=production jest -c ./test/jest.e2e.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,9 +19,11 @@
     "videojs-mux": "^3.1.4"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
     "chokidar": "^3.5.1",
     "css-loader": "^5.1.2",
     "esbuild": "^0.8.32",
+    "esbuild-jest": "^0.5.0",
     "esbuild-loader": "^2.7.0",
     "highlight.js": "^10.5.0",
     "html-webpack-plugin": "^5.0.0-beta.5",
