@@ -5,6 +5,7 @@ const port = 8080;
 module.exports = {
   browsers: ["chromium", "firefox", "webkit"],
   exitOnPageError: false,
+  testTimeout: 20000,
   launchOptions: {
     headless: true
   },
