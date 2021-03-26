@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+  <h1>Mux Video.js Kit</h1>
+
+  <section>
+    <h2>Thumbnail preview scrubber</h2>
+    <video id="mux-thumbnails" class="video-js vjs-16-9" controls preload="auto"
+      poster="https://image.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/thumbnail.jpg" data-setup='{
+          "thumbnailScrubber": true,
+          "plugins": {
+            "mux": {
+              "debug": true,
+              "data":{
+                "env_key": "ENV_KEY",
+                "video_title": "Mad Max"
+              }
+            }
+          }
+        }'>
+      <source src="DS00Spx1CV902MCtPj5WknGlR102V5HFkDe" type="video/mux" />
+    </video>
+  </section>
+</body>
+
+</html>

@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "globby": "^11.0.3",
     "hls.js": "^0.14.17",
     "video.js": "^7.10.2",
     "videojs-mux": "^4.0.0"
