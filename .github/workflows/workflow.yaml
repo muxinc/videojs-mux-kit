@@ -1,5 +1,5 @@
 name: Automated browser tests
-on: [push, workflow_dispatch]
+on: [push]
 
 jobs:
   test:
