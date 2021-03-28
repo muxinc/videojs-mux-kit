@@ -1,10 +1,26 @@
 const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const globby = require('globby');
+const path = require('path');
 
 const dev = process.env.NODE_ENV !== 'production';
 
-module.exports = {
+const buildHtmlWebpackConfigs = async () => {
+  const demoFiles = await globby(['src/demo/**.html']);
+
+  return demoFiles.map((demoFile) => {
+    const demoFileBase = path.parse(demoFile);
+    return new HtmlWebpackPlugin({
+      template: demoFile,
+      inject: true,
+      chunks: ['index'],
+      filename: `${demoFileBase.name}.html`,
+    })
+  });
+};
+
+module.exports = async () => ({
   entry: {
     index: [
       './src/index.js',
@@ -41,14 +57,9 @@ module.exports = {
   },
   plugins: [
     new ESBuildPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'src/demo/index.html',
-      inject: true,
-      chunks: ['index'],
-      filename: 'index.html',
-    }),
+    ...await buildHtmlWebpackConfigs(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
   ],
-};
+});
