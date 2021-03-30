@@ -1,5 +1,5 @@
 {
-  "name": "@mux/videojs",
+  "name": "@mux/videojs-kit",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -15,6 +15,10 @@
     "video.js": "^7.10.2",
     "videojs-mux": "^4.0.0"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "devDependencies": {
     "chokidar": "^3.5.1",
     "css-loader": "^5.1.2",
