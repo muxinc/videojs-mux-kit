@@ -1,16 +1,36 @@
 const playwright = require('playwright');
 
 describe('Data demo page', () => {
-  it('should load', async () => {
-    for (const browserType of ["chromium", "firefox", "webkit"]) {
-      const browser = await playwright[browserType].launch();
-      const context = await browser.newContext();
-      const page = await context.newPage();
-      await page.goto('http://localhost:8080/data.html');
+  it('chromium should load', async () => {
+    const browser = await playwright['chromium'].launch();
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto('http://localhost:8080/data.html');
 
-      expect(await page.$eval("h2", el => el.textContent)).toEqual('Data integration');
-      
-      await browser.close();
-    }    
-  })
+    expect(await page.$eval("h2", el => el.textContent)).toEqual('Data integration');
+    
+    await browser.close();
+  });
+  
+  it('firefox should load', async () => {
+    const browser = await playwright['firefox'].launch();
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto('http://localhost:8080/data.html');
+
+    expect(await page.$eval("h2", el => el.textContent)).toEqual('Data integration');
+    
+    await browser.close();
+  });
+  
+  it('webkit should load', async () => {
+    const browser = await playwright['webkit'].launch();
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto('http://localhost:8080/data.html');
+
+    expect(await page.$eval("h2", el => el.textContent)).toEqual('Data integration');
+    
+    await browser.close();
+  });
 });
