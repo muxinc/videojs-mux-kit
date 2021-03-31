@@ -4,13 +4,20 @@ import './style/index.scss';
 
 import './plugins/vtt-thumbnails.js';
 import './tech/hlsjs';
-import setupMuxDataTracking from './utils/mux-data-middleware';
+import {setupMuxDataTracking, setupMuxDataMetadataOverride} from './utils/mux-data-middleware';
+
+videojs.hook('beforesetup', function(videoEl, options) {
+  // We might have Mux Data enabled, and we need to handle overriding some metadata
+  options = setupMuxDataMetadataOverride(videoEl, options);
+
+  return options;
+});
 
 videojs.use('video/mux', (player) => {
   return {
     setSource({ src }, next) {
 
-      if (player.options().thumbnailScrubber) {
+      if (player.options().timelineHoverPreviews) {
         player.vttThumbnails({
           src: `https://image.mux.com/${src}/storyboard.vtt`,
         });

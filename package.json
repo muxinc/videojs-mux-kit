@@ -1,6 +1,6 @@
 {
-  "name": "@mux/videojs",
-  "version": "1.0.0",
+  "name": "@mux/videojs-kit",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -12,12 +12,16 @@
     "test:e2e": "NODE_ENV=production jest -c ./test/jest.e2e.config.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "hls.js": "^0.14.17",
     "video.js": "^7.10.2",
     "videojs-mux": "^4.0.0"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "devDependencies": {
     "chokidar": "^3.5.1",
     "css-loader": "^5.1.2",
