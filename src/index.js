@@ -17,7 +17,7 @@ videojs.use('video/mux', (player) => {
   return {
     setSource({ src }, next) {
 
-      if (player.options().thumbnailScrubber) {
+      if (player.options().timelineHoverPreviews) {
         player.vttThumbnails({
           src: `https://image.mux.com/${src}/storyboard.vtt`,
         });
