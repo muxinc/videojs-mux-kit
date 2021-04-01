@@ -23,7 +23,10 @@ A full example, including Mux Data configuration:
   data-setup='{
     "plugins": {
       "mux": {
-        "env_key": "your-mux-data-env-key"
+        "data": {
+          "env_key": "your-mux-data-env-key",
+          "video_title": "video-title-metadata"
+        }
       }
     }
   }'

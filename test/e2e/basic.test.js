@@ -3,7 +3,5 @@ describe('Basic demo page', () => {
     await page.goto('http://localhost:8080/basic.html');
 
     expect(await page.$eval("h2", el => el.textContent)).toEqual('Basic example');
-    
-    await browser.close();
   });
 });
