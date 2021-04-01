@@ -53,7 +53,9 @@ module.exports = async () => ({
   },
   optimization: {
     minimize: true,
-    minimizer: [new ESBuildMinifyPlugin()],
+    minimizer: [new ESBuildMinifyPlugin({
+      target: 'es2015'
+    })],
   },
   plugins: [
     new ESBuildPlugin(),
