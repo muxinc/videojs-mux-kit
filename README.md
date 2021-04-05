@@ -24,8 +24,8 @@ A full example, including Mux Data configuration:
     "plugins": {
       "mux": {
         "data": {
-          "env_key": "your-mux-data-env-key",
-          "video_title": "video-title-metadata"
+          "env_key": "ENV_KEY",
+          "video_title": "My Great Video"
         }
       }
     }
