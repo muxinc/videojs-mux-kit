@@ -35,9 +35,4 @@ videojs.use('video/mux', (player) => {
   };
 });
 
-// add videojs to the window so it can be used for other things
-if(window.videojs !== typeof('function')) {
-  window.videojs = videojs;
-}
-
 export default videojs;
