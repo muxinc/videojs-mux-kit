@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "clean": "rm -rf ./dist",
     "dev": "webpack serve",
     "build": "NODE_ENV=production webpack",
@@ -17,6 +18,9 @@
     "hls.js": "^0.14.17",
     "video.js": "^7.10.2",
     "videojs-mux": "^4.0.0"
+  },
+  "resolutions": {
+    "videojs-vtt.js": "^0.15.3"
   },
   "files": [
     "dist",
