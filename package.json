@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "hls.js": "^0.14.17",
-    "video.js": ">=7.12.1",
+    "video.js": ">= 7.12.1 < 8",
     "videojs-mux": "^4.0.0"
   },
   "files": [
