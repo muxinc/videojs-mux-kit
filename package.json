@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "dev": "webpack serve",
-    "build": "NODE_ENV=production webpack",
+    "dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "npm run test:integrations && npm run test:e2e",
     "test:integrations": "jest -c ./test/jest.config.js",
     "test:e2e": "NODE_ENV=production jest -c ./test/jest.e2e.config.js"
@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "hls.js": "^0.14.17",
-    "video.js": "^7.10.2",
+    "video.js": "^7.12.1",
     "videojs-mux": "^4.0.0"
   },
   "files": [
@@ -42,6 +42,7 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.19.0",
     "webpack-cli": "^4.3.1",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
   }
 }
