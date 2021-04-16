@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: 14
       - run: npm ci
+      - uses: microsoft/playwright-github-action@v1
       - run: npm test
 
   publish-npm:
