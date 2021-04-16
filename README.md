@@ -64,7 +64,7 @@ Of course, you can also initialize all of this via JS as well:
 />
 
 <script type="text/javascript">
-  const player = videojs.default('mux-default', {
+  const player = videojs('mux-default', {
     "plugins": {
       "mux": {
         "timelineHoverPreviews": true,
