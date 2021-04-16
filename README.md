@@ -4,7 +4,7 @@ The Video.js you know and love but optimized for using with Mux. The base is sli
 
 ## Usage
 
-The [demos](./demo/index.html) are a great place to start! In general, you can expect this to work almost exactly like Video.js + Mux Data with a few extra niceties. Mux streams can be specified by simply including the playback ID as the `src`, and `video/mux` as the type. Your source will then look like:
+The [demos](./demo/basic.html) are a great place to start! In general, you can expect this to work almost exactly like Video.js + Mux Data with a few extra niceties. Mux streams can be specified by simply including the playback ID as the `src`, and `video/mux` as the type. Your source will then look like:
 
 ```html
 <source src="DS00Spx1CV902MCtPj5WknGlR102V5HFkDe" type="video/mux" />
