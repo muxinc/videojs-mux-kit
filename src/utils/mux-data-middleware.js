@@ -15,7 +15,7 @@ function setupMuxDataTracking (player) {
 function setupMuxDataMetadataOverride (videoEl, options) {
   // depending which way Mux Data is init'd, we have to inject metadata in different ways
   // we'll start with if we get init'd on the data-setup element
-  if (videoEl?.dataset?.setup && videoEl.dataset.setup !== undefined) {
+  if (videoEl?.dataset?.setup) {
     let setup = videoEl.dataset.setup;
     setup = JSON.parse(setup);
     if (setup && setup?.plugins?.mux?.data) {
