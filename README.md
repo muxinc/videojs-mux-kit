@@ -60,7 +60,6 @@ Of course, you can also initialize all of this via JS as well:
   preload="auto"
   width="100%"
   poster="https://image.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/thumbnail.jpg"
-  data-setup='{}'
 />
 
 <script type="text/javascript">
@@ -80,4 +79,4 @@ Of course, you can also initialize all of this via JS as well:
 </script>
 ```
 
-Also, the [demos](./src/demo) are a great place to more references! In general, you can expect this to work almost exactly like Video.js + Mux Data with a few extra niceties. Mux streams can be specified by simply including the playback ID as the `src`, and `video/mux` as the type.
+Also, the [demos](https://github.com/muxinc/videojs-mux-kit/tree/main/src/demo) are a great place to more references! In general, you can expect this to work almost exactly like Video.js + Mux Data with a few extra niceties. Mux streams can be specified by simply including the playback ID as the `src`, and `video/mux` as the type.
