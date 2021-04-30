@@ -23,7 +23,7 @@ module.exports = async function() {
   return merge(common, {
     entry: {
       index: [
-        './src/index.js',
+        './src/entry.js',
         './src/demo/preview.js',
         './src/demo/preview.scss',
       ],
