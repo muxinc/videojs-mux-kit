@@ -9,14 +9,16 @@ The Video.js you know and love but optimized for using with Mux. The base is sli
 npm install @mux/videojs-kit
 
 // yarn
-yarn add @mux/videojs-kit  
+yarn add @mux/videojs-kit
 ```
+
+If you don't use a package manager such as NPM, there are hosted versions provided by [unpkg.com](https://unpkg.com) too.
 
 ## Usage
 
 _In the below examples, replace the `src` attribute example to reflect the playback ID of your chosing._
 
-Import the javascript and css in your application like this:
+If you use a package manager such as NPM, import the javascript and css in your application like this:
 
 ```js
 // include the video.js kit javascript and css
@@ -24,7 +26,14 @@ import videojs from '@mux/videojs-kit';
 import '@mux/videojs-kit/dist/index.css';  
 ```
 
-Then, on your page include a <video> element where you want to add your player.
+If you'd rather use the hosted versions, include this in your HTML page:
+```js
+// script tags
+<script src="https://unpkg.com/@mux/videojs-kit@0.1/dist/index.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.1/dist/index.css">
+```
+
+Then, on your page include a `<video>` element where you want to add your player.
 
 ```html
 <video
@@ -35,9 +44,9 @@ Then, on your page include a <video> element where you want to add your player.
   width="100%"
   poster="https://image.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/thumbnail.jpg"
   data-setup='{
+    "timelineHoverPreviews": true,
     "plugins": {
       "mux": {
-        "timelineHoverPreviews": true,
         "data": {
           "env_key": "ENV_KEY",
           "video_title": "My Great Video"
@@ -64,9 +73,9 @@ Of course, you can also initialize all of this via JS as well:
 
 <script type="text/javascript">
   const player = videojs('mux-default', {
+    "timelineHoverPreviews": true,
     "plugins": {
       "mux": {
-        "timelineHoverPreviews": true,
         "data": {
           "env_key": "ENV_KEY",
           "video_title": "My Great Video"
