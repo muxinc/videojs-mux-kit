@@ -29,7 +29,14 @@ class HlsJs {
   }
 
   setupHls() {
-    if (Hls.isSupported()) {
+    if (this.el.canPlayType('application/vnd.apple.mpegurl') && isSafari()) {
+      // We're using Safari, so let's stick with the native HLS engine
+      // Other browsers such as IE edge do have native support, but generally 
+      // it's not perfect, so let those fall through to use HLS.js instead
+      this.el.src = this.source.src;
+
+      // Check if HLS.js is supported
+    } else if (Hls.isSupported()) {
       this.hls.attachMedia(this.el);
       this.hls.loadSource(this.source.src);
     }
@@ -61,6 +68,10 @@ const sourceHandler = {
     return "";
   },
 };
+
+const isSafari = () => (
+  navigator && typeof navigator !== undefined && (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.search('Chrome') === -1)
+);
 
 videojs.getTech('Html5').registerSourceHandler(sourceHandler, 0);
 
