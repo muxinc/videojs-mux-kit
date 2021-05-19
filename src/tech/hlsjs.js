@@ -29,8 +29,9 @@ class HlsJs {
   }
 
   setupHls() {
-    if (this.el.canPlayType('application/vnd.apple.mpegurl') && isSafari()) {
-      // We're using Safari, so let's stick with the native HLS engine
+    if (this.el.canPlayType('application/vnd.apple.mpegurl') && videojs.browser.IS_ANY_SAFARI) {
+      // We're using Safari (or another apple component like WKWebView), so let's 
+      // stick with the native HLS engine
       // Other browsers such as IE edge do have native support, but generally 
       // it's not perfect, so let those fall through to use HLS.js instead
       this.el.src = this.source.src;
@@ -68,10 +69,6 @@ const sourceHandler = {
     return "";
   },
 };
-
-const isSafari = () => (
-  navigator && typeof navigator !== undefined && (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.search('Chrome') === -1)
-);
 
 videojs.getTech('Html5').registerSourceHandler(sourceHandler, 0);
 
