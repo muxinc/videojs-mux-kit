@@ -5,6 +5,7 @@ import './style/index.scss';
 import './plugins/vtt-thumbnails.js';
 import './tech/hlsjs';
 import {setupMuxDataTracking, setupMuxDataMetadataOverride} from './utils/mux-data-middleware';
+import {setupSubtitlesForPlayer} from './utils/mux-subtitles';
 
 videojs.hook('beforesetup', function(videoEl, options) {
   // We might have Mux Data enabled, and we need to handle overriding some metadata
@@ -31,6 +32,9 @@ videojs.use('video/mux', (player) => {
       if (player.mux && player.mux.addHLSJS) {
         setupMuxDataTracking(player);
       }
+
+      setupSubtitlesForPlayer(player);
+      
     },
   };
 });
