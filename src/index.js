@@ -19,8 +19,12 @@ videojs.use('video/mux', (player) => {
     setSource({ src }, next) {
 
       if (player.options().timelineHoverPreviews) {
+        // strip off any playback related query string parameters, so the
+        // storyboard url is not malformed
+        let playbackId = src.split(`?`, 1);
+        
         player.vttThumbnails({
-          src: `https://image.mux.com/${src}/storyboard.vtt`,
+          src: `https://image.mux.com/${playbackId[0]}/storyboard.vtt`,
         });
       }
 
