@@ -5,6 +5,7 @@ import './style/index.scss';
 import './plugins/vtt-thumbnails.js';
 import './tech/hlsjs';
 import {setupMuxDataTracking, setupMuxDataMetadataOverride} from './utils/mux-data-middleware';
+import {setupSubtitlesForPlayer} from './utils/mux-subtitles';
 
 videojs.hook('beforesetup', function(videoEl, options) {
   // We might have Mux Data enabled, and we need to handle overriding some metadata
@@ -18,8 +19,12 @@ videojs.use('video/mux', (player) => {
     setSource({ src }, next) {
 
       if (player.options().timelineHoverPreviews) {
+        // strip off any playback related query string parameters, so the
+        // storyboard url is not malformed
+        let playbackId = src.split(`?`, 1);
+        
         player.vttThumbnails({
-          src: `https://image.mux.com/${src}/storyboard.vtt`,
+          src: `https://image.mux.com/${playbackId[0]}/storyboard.vtt`,
         });
       }
 
@@ -31,6 +36,9 @@ videojs.use('video/mux', (player) => {
       if (player.mux && player.mux.addHLSJS) {
         setupMuxDataTracking(player);
       }
+
+      setupSubtitlesForPlayer(player);
+      
     },
   };
 });

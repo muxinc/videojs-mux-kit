@@ -1,0 +1,5 @@
+/* Hide the captions settings item from the captions menu. */
+/* This is because hls.js tech can't control formatting. */
+.vjs-texttrack-settings {
+    display: none;
+  }
