@@ -6,6 +6,8 @@ import {setupMuxDataTracking, setupMuxDataMetadataOverride} from './utils/mux-da
 import {setupSubtitlesForPlayer} from './utils/mux-subtitles';
 import {setupTimelineHoverPreviewsHelper} from './utils/mux-timelineHoverPreviews';
 
+let vttThumbnailsInitialized = false;
+
 videojs.hook('beforesetup', function(videoEl, options) {
   // We might have Mux Data enabled, and we need to handle overriding some metadata
   options = setupMuxDataMetadataOverride(videoEl, options);
