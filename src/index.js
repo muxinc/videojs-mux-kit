@@ -1,5 +1,4 @@
 import videojs from 'video.js/core';
-
 import './style/index.scss';
 
 import './plugins/vtt-thumbnails.js';
@@ -16,6 +15,39 @@ videojs.hook('beforesetup', function(videoEl, options) {
   return options;
 });
 
+videojs.hook('setup', function(player) {
+  
+  player.timelineHoverPreviews = function(enabled=false, source=null) {
+
+    if (!enabled && vttThumbnailsInitialized) {
+      // if timelineHoverPreviews were enabled, remove them
+      player.vttThumbnails.detach();
+      player.options().timelineHoverPreviewsUrl = null;
+      return;
+
+    } else if (!vttThumbnailsInitialized && source !== null) {
+      // if this is the first time the player instance has a timelineHoverPreviews source,
+      // init the plugin with the source
+      player.vttThumbnails({src: source});
+      vttThumbnailsInitialized = true;
+      player.options().timelineHoverPreviewsUrl = source;
+      return;
+
+    } else if (vttThumbnailsInitialized && source !== null) {
+      // the plugin is already running, so just update to the new source
+      player.vttThumbnails.src(source);
+      player.options().timelineHoverPreviewsUrl = source;
+      return;
+
+    }
+  }
+
+  if (player.options().timelineHoverPreviewsUrl) {
+    // we should setup timelineHoverPreviews with the URL passed in the player config options
+    player.timelineHoverPreviews(true, player.options().timelineHoverPreviewsUrl);
+  }
+});
+
 videojs.use('video/mux', (player) => {
   return {
     setSource({ src }, next) {
@@ -25,20 +57,8 @@ videojs.use('video/mux', (player) => {
         // storyboard url is not malformed
         let playbackId = src.split(`?`, 1);
         let storyboardUrl = `https://image.mux.com/${playbackId[0]}/storyboard.vtt`;
-
-        if (player.options().timelineHoverPreviews.token) {
-          // append the token to the storyboard request, if a token is provided
-          storyboardUrl = storyboardUrl + `?token=` + player.options().timelineHoverPreviews.token;
-        }
         
-        if (!vttThumbnailsInitialized) {
-          // this is the first time the video is loaded, so setup the plugin
-          player.vttThumbnails({src: storyboardUrl});
-          vttThumbnailsInitialized = true;
-        } else {
-          // we already have a vttThumbnails plugin running, so just update the src
-          player.vttThumbnails.src(storyboardUrl);
-        }
+        player.timelineHoverPreviews(true, storyboardUrl);
       }
 
       next(null, {
