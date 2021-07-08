@@ -6,8 +6,6 @@ import {setupMuxDataTracking, setupMuxDataMetadataOverride} from './utils/mux-da
 import {setupSubtitlesForPlayer} from './utils/mux-subtitles';
 import {setupTimelineHoverPreviewsHelper} from './utils/mux-timelineHoverPreviews';
 
-let vttThumbnailsInitialized = false;
-
 videojs.hook('beforesetup', function(videoEl, options) {
   // We might have Mux Data enabled, and we need to handle overriding some metadata
   options = setupMuxDataMetadataOverride(videoEl, options);
@@ -29,7 +27,7 @@ videojs.use('video/mux', (player) => {
   return {
     setSource({ src }, next) {
 
-      if (player.options().timelineHoverPreviews) {
+      if (player.options().timelineHoverPreviews && !player.options().timelineHoverPreviewsUrl) {
         // strip off any playback related query string parameters, so the
         // storyboard url is not malformed
         let playbackId = src.split(`?`, 1);
