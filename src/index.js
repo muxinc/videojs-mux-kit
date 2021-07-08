@@ -27,7 +27,7 @@ videojs.use('video/mux', (player) => {
   return {
     setSource({ src }, next) {
 
-      if (player.options().timelineHoverPreviews && !player.options().timelineHoverPreviewsUrl) {
+      if (player.options().timelineHoverPreviews) {
         // strip off any playback related query string parameters, so the
         // storyboard url is not malformed
         let playbackId = src.split(`?`, 1);
