@@ -9,7 +9,7 @@ class HlsJs {
     this.source = source;
     this.tech = tech;
     this.el = tech.el();
-    this.hls = new Hls(options.hls);
+    this.hls = new Hls({ ...options.hls, liveDurationInfinity: true });
 
     this.setupEventHandlers();
     this.setupHls();
