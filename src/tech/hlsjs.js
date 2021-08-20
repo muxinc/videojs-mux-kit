@@ -29,15 +29,12 @@ class HlsJs {
   }
 
   setupHls() {
-    if (this.el.canPlayType('application/vnd.apple.mpegurl') && videojs.browser.IS_ANY_SAFARI) {
-      // We're using Safari (or another apple component like WKWebView), so let's 
-      // stick with the native HLS engine
-      // Other browsers such as IE edge do have native support, but generally 
-      // it's not perfect, so let those fall through to use HLS.js instead
+    // Browser natively supports HLS
+    if (this.el.canPlayType('application/vnd.apple.mpegurl')) {
       this.el.src = this.source.src;
-
-      // Check if HLS.js is supported
-    } else if (Hls.isSupported()) {
+    }
+    // Browser doesn't natively support HLS, but can support using Hls.js
+    else if (Hls.isSupported()) {
       this.hls.attachMedia(this.el);
       this.hls.loadSource(this.source.src);
     }
