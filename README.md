@@ -29,8 +29,8 @@ import '@mux/videojs-kit/dist/index.css';
 If you'd rather use the hosted versions, include this in your HTML page:
 ```js
 // script tags
-<script src="https://unpkg.com/@mux/videojs-kit@0.1/dist/index.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.1/dist/index.css">
+<script src="https://unpkg.com/@mux/videojs-kit@0.5/dist/index.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.5/dist/index.css">
 ```
 
 Then, on your page include a `<video>` element where you want to add your player.
