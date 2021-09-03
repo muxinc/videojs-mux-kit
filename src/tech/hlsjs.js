@@ -29,14 +29,13 @@ class HlsJs {
   }
 
   setupHls() {
-    // Browser natively supports HLS
-    if (this.el.canPlayType('application/vnd.apple.mpegurl')) {
-      this.el.src = this.source.src;
-    }
-    // Browser doesn't natively support HLS, but can support using Hls.js
-    else if (Hls.isSupported()) {
+    if (Hls.isSupported()) {
       this.hls.attachMedia(this.el);
       this.hls.loadSource(this.source.src);
+    } else if (this.el.canPlayType('application/vnd.apple.mpegurl')) {
+      this.el.src = this.source.src;
+    } else {
+      console.log('[videojs-mux-kit] Error: browser does not support MSE nor Hls natively');
     }
   }
 }
