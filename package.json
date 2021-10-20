@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "hls.js": "^1.0.7",
+    "hls.js": "^1.0.11",
     "video.js": "^7.12.1",
     "videojs-mux": "^4.0.0"
   },
