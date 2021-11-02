@@ -44,6 +44,7 @@ class HlsJs {
     this.source = source;
     this.tech = tech;
     // Use the base `Tech` error implementation instead of the Html5 one.
+    this._html5TechError = this.tech.error;
     this.tech.error = baseTechError;
     this.el = tech.el();
     this.hls = new Hls({ ...options.hls, liveDurationInfinity: true });
@@ -58,6 +59,8 @@ class HlsJs {
   dispose() {
     // Remove our DIY HTML5MediaElement listener on disposal.
     this.el.removeEventListener('error', this.mediaElErrorHandler_)
+    // Replace the original error method, just in case the `tech` instance is reused.
+    this.tech.error = this._html5TechError;
     this.hls.destroy();
   };
 
