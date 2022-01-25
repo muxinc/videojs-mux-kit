@@ -1,4 +1,4 @@
-import videojs from 'video.js/core';
+import videojs from 'video.js';
 import './style/index.scss';
 
 import './tech/hlsjs';

@@ -2,11 +2,6 @@ const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  resolve: {
-    alias: {
-      'video.js': 'video.js/core',
-    },
-  },
   module: {
     rules: [
       {

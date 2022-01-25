@@ -1,4 +1,4 @@
-import videojs from 'video.js/core';
+import videojs from 'video.js';
 import pkg from '../../package.json';
 import 'videojs-mux';
 import Hls from "hls.js";
