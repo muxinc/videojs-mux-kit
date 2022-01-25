@@ -1,9 +1,7 @@
 import videojs from 'video.js';
 import './style/index.scss';
 
-import './tech/hlsjs';
 import {setupMuxDataTracking, setupMuxDataMetadataOverride} from './utils/mux-data-middleware';
-import {setupSubtitlesForPlayer} from './utils/mux-subtitles';
 import {setupTimelineHoverPreviewsHelper} from './utils/mux-timelineHoverPreviews';
 
 videojs.hook('beforesetup', function(videoEl, options) {
@@ -44,9 +42,6 @@ videojs.use('video/mux', (player) => {
       if (player.mux && player.mux.addHLSJS) {
         setupMuxDataTracking(player);
       }
-
-      setupSubtitlesForPlayer(player);
-      
     },
   };
 });
