@@ -11,7 +11,7 @@
     "build:hlsjs": "webpack --config webpack.prod.js",
     "build:vhs": "webpack --config webpack.prod.js --env vhs",
     "test": "npm run test:integrations && npm run test:e2e",
-    "test:integrations": "jest -c ./test/jest.config.js",
+    "test:integrations": "jest -c ./test/jest.config.js --passWithNoTests",
     "test:e2e": "NODE_ENV=production jest -c ./test/jest.e2e.config.js"
   },
   "author": "",
