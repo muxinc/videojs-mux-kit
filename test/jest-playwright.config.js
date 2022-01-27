@@ -5,13 +5,13 @@ const usingVhs = Boolean(process.env.vhs);
 
 module.exports = {
   browsers: [
-    {
+    usingVhs ? {
       browserType: "chromium",
       launchOptions: {
         // run against the chrome channel so that the proper media codecs are available
         channel: 'chrome'
       }
-    },
+    } : 'chromium',
     "firefox"
   ],
   exitOnPageError: false,
