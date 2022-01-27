@@ -1,6 +1,7 @@
 import videojs from 'video.js';
 import pkg from '../../package.json';
 import 'videojs-mux';
+import Hls from "hls.js";
 
 function setupMuxDataTracking (player) {
   // hls.js access based on https://github.com/Peer5/videojs-contrib-hls.js/#custom-hlsjs-configuration
