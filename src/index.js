@@ -45,7 +45,9 @@ videojs.use('video/mux', (player) => {
         setupMuxDataTracking(player);
       }
 
-      setupSubtitlesForPlayer(player);
+      if (typeof setupSubtitlesForPlayer !== 'undefined') {
+        setupSubtitlesForPlayer(player);
+      }
     },
   };
 });

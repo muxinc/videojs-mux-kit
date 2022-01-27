@@ -19,8 +19,8 @@ const buildHtmlWebpackConfigs = async function () {
   });
 };
 
-module.exports = async function() {
-  return merge(common, {
+module.exports = async function(env) {
+  return merge(common(env), {
     entry: {
       index: [
         './src/entry.js',
