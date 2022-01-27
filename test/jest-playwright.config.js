@@ -10,7 +10,7 @@ module.exports = {
   },
   serverOptions: {
     port,
-    command: 'npm run dev',
+    command: 'npm run dev' + (Boolean(process.env.vhs) ? ':vhs' : ''),
     launchTimeout: 180000,
     waitOnScheme: {
       resources: [`http://localhost:${port}`],

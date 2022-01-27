@@ -10,9 +10,10 @@
     "build": "npm run build:hlsjs && npm run build:vhs",
     "build:hlsjs": "webpack --config webpack.prod.js",
     "build:vhs": "webpack --config webpack.prod.js --env vhs",
-    "test": "npm run test:integrations && npm run test:e2e",
+    "test": "npm run test:integrations && npm run test:e2e && npm run test:e2e:vhs",
     "test:integrations": "jest -c ./test/jest.config.js --passWithNoTests",
-    "test:e2e": "NODE_ENV=production jest -c ./test/jest.e2e.config.js"
+    "test:e2e": "NODE_ENV=production jest -c ./test/jest.e2e.config.js",
+    "test:e2e:vhs": "NODE_ENV=production vhs=true jest -c ./test/jest.e2e.config.js"
   },
   "author": "",
   "license": "MIT",
