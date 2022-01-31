@@ -1,6 +1,4 @@
 import videojs from 'video.js';
-import 'videojs-contrib-quality-levels';
-import 'videojs-http-source-selector';
 import './style/index.scss';
 
 import './tech/hlsjs';
@@ -26,8 +24,7 @@ videojs.hook('setup', function(player) {
 });
 
 videojs.use('video/mux', (player) => {
-  window.player = player;
-  player.httpSourceSelector();
+
   return {
     setSource({ src }, next) {
 

@@ -152,7 +152,6 @@ class HlsJs {
 
     this.tech.on(Hls.Events.MANIFEST_LOADED, (e, data) => {
       levels = new Array(this.hls.levels.length).fill(true);
-      window.levels = levels;
 
       if (this.hls.autoLevelCapping !== -1) {
         for (let i = this.hls.maxAutoLevel; i < this.hls.levels.length; i++) {
