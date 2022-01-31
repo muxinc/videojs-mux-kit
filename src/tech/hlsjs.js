@@ -12,13 +12,18 @@ class HlsJs {
 
     this.source = source;
     this.tech = tech;
+    // get a reference to the player so that we can hook up quality-levels if that exists
+    this.player = videojs.getPlayer(this.tech.options().playerId);
     // Use the base `Tech` error implementation instead of the Html5 one.
     this._html5TechError = this.tech.error;
     this.tech.error = baseTechError;
     this.el = tech.el();
     this.hls = new Hls({ ...options.hls, liveDurationInfinity: true });
 
-    this.setupQualityLevels();
+    if (this.player.qualityLevels) {
+      this.setupQualityLevels();
+    }
+
     this.setupEventHandlers();
     this.setupHls();
 
@@ -98,11 +103,33 @@ class HlsJs {
   }
 
   setupQualityLevels() {
-    this.tech.on([
-      Hls.Events.LEVEL_LOADED
-      // Hls.Events.MANIFEST_LOADED
-    ], (e, data) => {
-      console.log(this.hls.levels, data);
+    const ql = this.player.qualityLevels();
+
+    this.tech.on(Hls.Events.MANIFEST_LOADED, (e, data) => {
+      // A QualityLevel is a 
+      // Representation {
+      //   id: string,
+      //   width: number,
+      //   height: number,
+      //   bitrate: number,
+      //   enabled: function
+      // }
+      this.hls.levels.forEach((level, i) => {
+        ql.addQualityLevel({
+          id: i,
+          width: level.width,
+          height: level.height,
+          bitrate: level.bitrate,
+          enabled: () => { i === this.hls.currentLevel }
+        });
+      });
+      ql.selectedIndex_ = this.hls.currentLevel;
+      ql.trigger({ type: 'change', selectedIndex: this.hls.currentLevel });
+    });
+
+    this.tech.on(Hls.Events.LEVEL_SWITCHED, (e, data) => {
+      ql.selectedIndex_ = this.hls.currentLevel;
+      ql.trigger({ type: 'change', selectedIndex: this.hls.currentLevel });
     });
   }
 }
