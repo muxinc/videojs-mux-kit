@@ -105,32 +105,87 @@ class HlsJs {
   setupQualityLevels() {
     const ql = this.player.qualityLevels();
 
+    let levels;
+
+    const lastIndex = () => {
+      var last;
+
+      for (last = levels.length - 1; last > 0; last--) {
+        if (levels[last]) {
+          break;
+        }
+      }
+
+      return last;
+    };
+
+    const isAuto = () => {
+      return lastIndex() === this.hls.levels.length - 1;
+    };
+
+    const updateQuality = (i, enabled) => {
+      const last = lastIndex();
+
+      if (isAuto()) {
+        this.hls.autoLevelCapping = -1;
+      } else {
+        this.hls.autoLevelCapping = last;
+      }
+
+      if (!enabled) {
+        return;
+      }
+
+      if (this.hls.currentLevel !== i) {
+        this.hls.currentLevel = i;
+        triggerChange();
+      }
+
+    };
+
+    const triggerChange = (e, data) => {
+      let currentLevel = this.hls.currentLevel;
+
+      ql.selectedIndex_ = currentLevel;
+      ql.trigger({ type: 'change', selectedIndex: currentLevel });
+    };
+
     this.tech.on(Hls.Events.MANIFEST_LOADED, (e, data) => {
-      // A QualityLevel is a 
-      // Representation {
-      //   id: string,
-      //   width: number,
-      //   height: number,
-      //   bitrate: number,
-      //   enabled: function
-      // }
+      levels = new Array(this.hls.levels.length).fill(true);
+      window.levels = levels;
+
+      if (this.hls.autoLevelCapping !== -1) {
+        for (let i = this.hls.maxAutoLevel; i < this.hls.levels.length; i++) {
+          levels[i] = false;
+        }
+      }
+
       this.hls.levels.forEach((level, i) => {
+        // A QualityLevel is a
+        // Representation {
+        //   id: string,
+        //   width: number,
+        //   height: number,
+        //   bitrate: number,
+        //   enabled: function
+        // }
         ql.addQualityLevel({
           id: i,
           width: level.width,
           height: level.height,
           bitrate: level.bitrate,
-          enabled: () => { i === this.hls.currentLevel }
+          enabled: (enabled_) => {
+            levels[i] = enabled_;
+
+            updateQuality(i, enabled_);
+          }
         });
       });
       ql.selectedIndex_ = this.hls.currentLevel;
       ql.trigger({ type: 'change', selectedIndex: this.hls.currentLevel });
     });
 
-    this.tech.on(Hls.Events.LEVEL_SWITCHED, (e, data) => {
-      ql.selectedIndex_ = this.hls.currentLevel;
-      ql.trigger({ type: 'change', selectedIndex: this.hls.currentLevel });
-    });
+    this.tech.on(Hls.Events.LEVEL_SWITCHED, triggerChange);
   }
 }
 
