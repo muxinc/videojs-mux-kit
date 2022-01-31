@@ -18,6 +18,7 @@ class HlsJs {
     this.el = tech.el();
     this.hls = new Hls({ ...options.hls, liveDurationInfinity: true });
 
+    this.setupQualityLevels();
     this.setupEventHandlers();
     this.setupHls();
 
@@ -94,6 +95,15 @@ class HlsJs {
     } else {
       console.log('[videojs-mux-kit] Error: browser does not support MSE nor Hls natively');
     }
+  }
+
+  setupQualityLevels() {
+    this.tech.on([
+      Hls.Events.LEVEL_LOADED
+      // Hls.Events.MANIFEST_LOADED
+    ], (e, data) => {
+      console.log(this.hls.levels, data);
+    });
   }
 }
 
