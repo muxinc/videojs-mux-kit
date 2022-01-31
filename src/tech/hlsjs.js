@@ -108,7 +108,7 @@ class HlsJs {
     let levels;
 
     const lastIndex = () => {
-      var last;
+      let last;
 
       for (last = levels.length - 1; last > 0; last--) {
         if (levels[last]) {
