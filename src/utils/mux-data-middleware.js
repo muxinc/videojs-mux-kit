@@ -36,7 +36,8 @@ function setupMuxDataMetadataOverride (videoEl, options) {
 }
 
 function injectMuxDataMetadata (options) {
-  options.plugins.mux.data["player_software_name"] = "vjs-mux-kit-" + videojs?.VERSION.split('.')[0];
+  // The default build includes Hls and it's a function, in the VHS build Hls.js is excluded and it's an empty object
+  options.plugins.mux.data["player_software_name"] = "vjs-mux-kit-" + videojs?.VERSION.split('.')[0] + (typeof Hls === 'function' ? '' : '-vhs');
   options.plugins.mux.data["player_software_version"] = pkg.version;
   
   return options;
