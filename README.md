@@ -50,8 +50,8 @@ If you'd rather use the hosted versions, include this in your HTML page:
 #### VHS
 ```js
 // script tags
-<script src="https://unpkg.com/@mux/videojs-kit@0.6/dist/index.vhs.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.6/dist/index.css">
+<script src="https://unpkg.com/@mux/videojs-kit@0.8.0/dist/index.vhs.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.8.0/dist/index.css">
 ```
 
 ## Usage
