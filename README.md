@@ -43,8 +43,8 @@ If you'd rather use the hosted versions, include this in your HTML page:
 #### Default (hls.js)
 ```js
 // script tags
-<script src="https://unpkg.com/@mux/videojs-kit@0.7.1/dist/index.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.7.1/dist/index.css">
+<script src="https://unpkg.com/@mux/videojs-kit@0.8.0/dist/index.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.8.0/dist/index.css">
 ```
 
 #### VHS
