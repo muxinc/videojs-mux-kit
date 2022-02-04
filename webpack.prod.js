@@ -4,13 +4,13 @@ const path = require('path');
 
 const common = require('./webpack.common');
 
-module.exports = async function () {
-  return merge(common, {
+module.exports = async function (env) {
+  return merge(common(env), {
     entry: path.resolve(__dirname, "src/entry.js"),
     mode: 'production',
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "index.js",
+      filename: env.vhs ? "index.vhs.js" : "index.js",
       library: "videojs",
       libraryTarget: "umd",
       globalObject: 'this',

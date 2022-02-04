@@ -1,4 +1,4 @@
-import videojs from 'video.js/core';
+import videojs from 'video.js';
 import Hls from "hls.js";
 
 class HlsJs {

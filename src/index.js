@@ -1,4 +1,4 @@
-import videojs from 'video.js/core';
+import videojs from 'video.js';
 import './style/index.scss';
 
 import './tech/hlsjs';
@@ -45,8 +45,9 @@ videojs.use('video/mux', (player) => {
         setupMuxDataTracking(player);
       }
 
-      setupSubtitlesForPlayer(player);
-      
+      if (typeof setupSubtitlesForPlayer !== 'undefined') {
+        setupSubtitlesForPlayer(player);
+      }
     },
   };
 });
