@@ -24,6 +24,7 @@ videojs.hook('setup', function(player) {
 });
 
 videojs.use('video/mux', (player) => {
+
   return {
     setSource({ src }, next) {
 

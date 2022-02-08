@@ -12,11 +12,17 @@ class HlsJs {
 
     this.source = source;
     this.tech = tech;
+    // get a reference to the player so that we can hook up quality-levels if that exists
+    this.player = videojs.getPlayer(this.tech.options().playerId);
     // Use the base `Tech` error implementation instead of the Html5 one.
     this._html5TechError = this.tech.error;
     this.tech.error = baseTechError;
     this.el = tech.el();
     this.hls = new Hls({ ...options.hls, liveDurationInfinity: true });
+
+    if (this.player.qualityLevels) {
+      this.setupQualityLevels();
+    }
 
     this.setupEventHandlers();
     this.setupHls();
@@ -94,6 +100,91 @@ class HlsJs {
     } else {
       console.log('[videojs-mux-kit] Error: browser does not support MSE nor Hls natively');
     }
+  }
+
+  setupQualityLevels() {
+    const ql = this.player.qualityLevels();
+
+    let levels;
+
+    const lastIndex = () => {
+      let last;
+
+      for (last = levels.length - 1; last > 0; last--) {
+        if (levels[last]) {
+          break;
+        }
+      }
+
+      return last;
+    };
+
+    const isAuto = () => {
+      return lastIndex() === this.hls.levels.length - 1;
+    };
+
+    const updateQuality = (i, enabled) => {
+      const last = lastIndex();
+
+      if (isAuto()) {
+        this.hls.autoLevelCapping = -1;
+      } else {
+        this.hls.autoLevelCapping = last;
+      }
+
+      if (!enabled) {
+        return;
+      }
+
+      if (this.hls.currentLevel !== i) {
+        this.hls.currentLevel = i;
+        triggerChange();
+      }
+
+    };
+
+    const triggerChange = (e, data) => {
+      let currentLevel = this.hls.currentLevel;
+
+      ql.selectedIndex_ = currentLevel;
+      ql.trigger({ type: 'change', selectedIndex: currentLevel });
+    };
+
+    this.tech.on(Hls.Events.MANIFEST_LOADED, (e, data) => {
+      levels = new Array(this.hls.levels.length).fill(true);
+
+      if (this.hls.autoLevelCapping !== -1) {
+        for (let i = this.hls.maxAutoLevel; i < this.hls.levels.length; i++) {
+          levels[i] = false;
+        }
+      }
+
+      this.hls.levels.forEach((level, i) => {
+        // A QualityLevel is a
+        // Representation {
+        //   id: string,
+        //   width: number,
+        //   height: number,
+        //   bitrate: number,
+        //   enabled: function
+        // }
+        ql.addQualityLevel({
+          id: i,
+          width: level.width,
+          height: level.height,
+          bitrate: level.bitrate,
+          enabled: (enabled_) => {
+            levels[i] = enabled_;
+
+            updateQuality(i, enabled_);
+          }
+        });
+      });
+      ql.selectedIndex_ = this.hls.currentLevel;
+      ql.trigger({ type: 'change', selectedIndex: this.hls.currentLevel });
+    });
+
+    this.tech.on(Hls.Events.LEVEL_SWITCHED, triggerChange);
   }
 }
 
