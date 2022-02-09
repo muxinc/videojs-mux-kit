@@ -20,7 +20,7 @@ If you don't use a package manager such as NPM, there are hosted versions provid
 
 ### Importing
 
-If you use a package manager such as NPM, import the javascript and css in your application like this:
+If you use a package manager such as NPM, import the JavaScript and CSS in your application like this:
 
 #### Default (hls.js)
 ```js
@@ -43,20 +43,20 @@ If you'd rather use the hosted versions, include this in your HTML page:
 #### Default (hls.js)
 ```js
 // script tags
-<script src="https://unpkg.com/@mux/videojs-kit@0.9.0/dist/index.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.9.0/dist/index.css">
+<script src="https://unpkg.com/@mux/videojs-kit@0.9.1/dist/index.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.9.1/dist/index.css">
 ```
 
 #### VHS
 ```js
 // script tags
-<script src="https://unpkg.com/@mux/videojs-kit@0.9.0/dist/index.vhs.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.9.0/dist/index.css">
+<script src="https://unpkg.com/@mux/videojs-kit@0.9.1/dist/index.vhs.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.9.1/dist/index.css">
 ```
 
 ## Usage
 
-_In the below examples, replace the `src` attribute example to reflect the playback ID of your chosing._
+_In the below examples, replace the `src` attribute example to reflect the playback ID of your choosing._
 
 
 Then, on your page include a `<video>` element where you want to add your player.
