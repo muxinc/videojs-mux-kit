@@ -76,7 +76,12 @@ class HlsJs {
       // do this for hlsError events.
       if (eventName === Hls.Events.ERROR) {
         this.hls.on(eventName, (_event, hlsError) => {
-          const { type } = hlsError;
+          const { type, fatal } = hlsError;
+
+          if (!fatal) {
+            return;
+          }
+
           const code = ErrorTypeMap[type] ?? ErrorTypeMap.DEFAULT;
           this.tech.error({ code, hlsError });
         });
