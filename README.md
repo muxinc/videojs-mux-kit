@@ -119,4 +119,4 @@ Of course, you can also initialize all of this via JS as well:
 Also, the [demos](https://github.com/muxinc/videojs-mux-kit/tree/main/src/demo) are a great place to more references! In general, you can expect this to work almost exactly like Video.js + Mux Data with a few extra niceties. Mux streams can be specified by simply including the playback ID as the `src`, and `video/mux` as the type.
 
 To run the demos, you can run `npm run dev` or `npm run dev:vhs` for running with VHS.
-Once the dev server is running, open `http://localhost:8000/{file}` with `{file}` being one the demos like `basic.html` or `data.html`.
+Once the dev server is running, open `http://localhost:8080/{file}` with `{file}` being one the demos like `basic.html` or `data.html`.
