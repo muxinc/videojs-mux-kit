@@ -114,6 +114,40 @@ Of course, you can also initialize all of this via JS as well:
 </script>
 ```
 
+### Quality Levels
+
+A plugin for [a quality levels menu](https://github.com/jfujita/videojs-http-source-selector) is now included by default, however, it is not enabled by default.
+To enable quality levels, you'll want to either specify it in the `plugins` object, like above, or call the method directly on the player:
+```html
+<video
+  id="mux-default"
+  class="video-js vjs-16-9"
+  controls
+  preload="auto"
+  width="100%"
+  poster="https://image.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/thumbnail.jpg"
+  data-setup='{
+    "timelineHoverPreviews": true,
+    "plugins": {
+      "mux": {
+        "data": {
+          "env_key": "ENV_KEY",
+          "video_title": "My Great Video"
+        }
+      },
+      "httpSourceSelector": {}
+    }
+  }'
+>
+  <source src="DS00Spx1CV902MCtPj5WknGlR102V5HFkDe" type="video/mux" />
+</video>
+```
+
+```js
+const player = videojs.getPlayer('mux-default');
+player.httpSourceSelector();
+```
+
 ## I'm importing another plugin but it isn't available when I test in the browser
 
 This is because most Video.js plugins depend directly on Video.js but by default Video.js Mux Kit uses hls.js by default and to maintain a smaller file-size we use Video.js's `core` build which excludes VHS. You shouldn't need to do this if you're using the [VHS build](#vhs)

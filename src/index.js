@@ -1,4 +1,6 @@
 import videojs from 'video.js';
+import 'videojs-contrib-quality-levels';
+import 'videojs-http-source-selector';
 import './style/index.scss';
 
 import './tech/hlsjs';
