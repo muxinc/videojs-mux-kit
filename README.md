@@ -114,6 +114,40 @@ Of course, you can also initialize all of this via JS as well:
 </script>
 ```
 
+## I'm importing another plugin but it isn't available when I test in the browser
+
+This is because most Video.js plugins depend directly on Video.js but by default Video.js Mux Kit uses hls.js by default and to maintain a smaller file-size we use Video.js's `core` build which excludes VHS. You shouldn't need to do this if you're using the [VHS build](#vhs)
+
+This means that the Video.js that is used by Video.js Mux Kit references `video.js/core` instead of `video.js`. To get plugins to work, you'll need to make sure that plugins are also loading in `video.js/core` instead of only `video.js`. Most bundlers have some way of configuring these type of aliases.
+
+For webpack, you can use [the `resolve` configuration option](https://webpack.js.org/configuration/resolve/):
+```js
+config.resolve = {
+  alias: {
+    'video.js': 'video.js/core',
+  }
+};
+```
+> This is how Video.js Mux Kit builds out the hls.js and VHS builds internally, see [our webpack config](./webpack.common.js).
+
+For rollup, you'll want to grab their [alias plugin](https://github.com/rollup/plugins/tree/master/packages/alias), and then configure it into the plugins array like so:
+```js
+module.exports = {
+  input: 'src/index.js',
+  output: {
+    dir: 'output',
+    format: 'cjs'
+  },
+  plugins: [
+    alias({
+      entries: [
+        { find: 'video.js', replacement: require.resolve('video.js/core') }
+      ]
+    })
+  ]
+};
+```
+
 ## Demos
 
 Also, the [demos](https://github.com/muxinc/videojs-mux-kit/tree/main/src/demo) are a great place to more references! In general, you can expect this to work almost exactly like Video.js + Mux Data with a few extra niceties. Mux streams can be specified by simply including the playback ID as the `src`, and `video/mux` as the type.
