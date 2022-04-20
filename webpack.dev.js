@@ -24,8 +24,6 @@ module.exports = async function(env) {
     entry: {
       index: [
         './src/entry.js',
-        'videojs-contrib-quality-levels',
-        'videojs-http-source-selector',
         './src/demo/preview.js',
         './src/demo/preview.scss',
       ],
