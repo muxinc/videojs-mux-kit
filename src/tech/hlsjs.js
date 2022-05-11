@@ -206,8 +206,8 @@ const sourceHandler = {
     }
   },
 
-  handleSource(source, tech) {
-    return new HlsJs(source, tech);
+  handleSource(source, tech, options = {}) {
+    return new HlsJs(source, tech, options);
   },
 
   canPlayType(type) {
