@@ -19,6 +19,8 @@ class HlsJs {
     this.tech.error = baseTechError;
     this.el = tech.el();
     this.hls = new Hls({ ...options.hls, liveDurationInfinity: true });
+    // expose hlsjs on the tech
+    this.tech.hlsjs = this.hls;
 
     if (this.player.qualityLevels) {
       this.setupQualityLevels();
@@ -37,6 +39,7 @@ class HlsJs {
     // Replace the original error method, just in case the `tech` instance is reused.
     this.tech.error = this._html5TechError;
     this.hls.destroy();
+    delete this.tech.hlsjs;
   };
 
   setupEventHandlers() {
