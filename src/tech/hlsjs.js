@@ -18,7 +18,12 @@ class HlsJs {
     this._html5TechError = this.tech.error;
     this.tech.error = baseTechError;
     this.el = tech.el();
-    this.hls = new Hls({ ...options.hls, liveDurationInfinity: true });
+    this.hls = new Hls({
+      backBufferLength: 30,
+      liveDurationInfinity: true,
+      // must come last so it could override the above options
+      ...options.hls
+    });
     // expose hlsjs on the tech
     this.tech.hlsjs = this.hls;
 
