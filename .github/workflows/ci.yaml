@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 14
 
-      - uses: microsoft/playwright-github-action@v1
+      - uses: microsoft/playwright-github-action@v1.5.1
 
       - name: Install dependencies and run tests
         run: npm ci && npm test
