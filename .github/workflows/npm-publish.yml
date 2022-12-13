@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 14
 
-      - uses: microsoft/playwright-github-action@v1
+      - uses: microsoft/playwright-github-action@v1.5.1
 
       - name: Install dependencies and run tests
         run: npm ci && npm test
