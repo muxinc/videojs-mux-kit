@@ -43,15 +43,15 @@ If you'd rather use the hosted versions, include this in your HTML page:
 #### Default (hls.js)
 ```js
 // script tags
-<script src="https://unpkg.com/@mux/videojs-kit@0.11.3/dist/index.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.11.3/dist/index.css">
+<script src="https://unpkg.com/@mux/videojs-kit@0.11.4/dist/index.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.11.4/dist/index.css">
 ```
 
 #### VHS
 ```js
 // script tags
-<script src="https://unpkg.com/@mux/videojs-kit@0.11.3/dist/index.vhs.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.11.3/dist/index.css">
+<script src="https://unpkg.com/@mux/videojs-kit@0.11.4/dist/index.vhs.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mux/videojs-kit@0.11.4/dist/index.css">
 ```
 
 ## Usage
