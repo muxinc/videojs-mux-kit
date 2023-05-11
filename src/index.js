@@ -29,7 +29,7 @@ videojs.use('video/mux', (player) => {
 
   return {
     setSource({ src }, next) {
-      const { customDomain:domain = 'mux.com', timelineHoverPreviews } = player.options();
+      const { customDomain: domain = 'mux.com', timelineHoverPreviews } = player.options();
 
       if (timelineHoverPreviews) {
         // strip off any playback related query string parameters, so the
