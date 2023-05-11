@@ -148,6 +148,27 @@ const player = videojs.getPlayer('mux-default');
 player.httpSourceSelector();
 ```
 
+### Custom Domains
+
+By default, all Mux Video assets will be hosted on mux.com. This includes things like posters, storyboards, and media sources.
+
+[Custom Domains](https://www.mux.com/blog/introducing-custom-domains?_gl=1*h19ho7*_ga*MTQ2MTY1MjY5My4xNjc0MjU0OTYy*_ga_D3BFYPQXX7*MTY4MzgzNzcwOC42NC4wLjE2ODM4Mzc3MTQuMC4wLjA.), is a feature which allows you to stream these assets from a domain of your choice.
+
+Once you have your custom domain set up, provide it via the `customDomain` property. If your custom domain is `media.example.com` then internally `videojs-mux-kit` will take that value and expand it to `image.media.example.com` for images and `stream.media.example.com` for video.  The only exception is the `poster` property in which you will need to provide the fully qualified url.
+
+Example with the HTML element:
+
+```html
+<video id="mux-custom-domain" class="video-js vjs-16-9" controls preload="auto"
+  poster="https://image.media.heymux.com/Kn00wAAUmt3MPOeFlmuAeS4qSIW41v5Ixg5fQ00YuCX400/thumbnail.jpg" data-setup='{
+    "customDomain": "media.heymux.com",
+    "timelineHoverPreviews": true
+  }'
+>
+  <source src="Kn00wAAUmt3MPOeFlmuAeS4qSIW41v5Ixg5fQ00YuCX400" type="video/mux" />
+</video>
+```
+
 ## I'm importing another plugin but it isn't available when I test in the browser
 
 This is because most Video.js plugins depend directly on Video.js but by default Video.js Mux Kit uses hls.js by default and to maintain a smaller file-size we use Video.js's `core` build which excludes VHS. You shouldn't need to do this if you're using the [VHS build](#vhs)

@@ -29,18 +29,19 @@ videojs.use('video/mux', (player) => {
 
   return {
     setSource({ src }, next) {
+      const { customDomain:domain = 'mux.com', timelineHoverPreviews } = player.options();
 
-      if (player.options().timelineHoverPreviews) {
+      if (timelineHoverPreviews) {
         // strip off any playback related query string parameters, so the
         // storyboard url is not malformed
         let playbackId = src.split(`?`, 1);
-        let storyboardUrl = `https://image.mux.com/${playbackId[0]}/storyboard.vtt`;
+        let storyboardUrl = `https://image.${domain}/${playbackId[0]}/storyboard.vtt`;
         
         player.timelineHoverPreviews({enabled: true, src: storyboardUrl});
       }
 
       next(null, {
-        src: `https://stream.mux.com/${src}`,
+        src: `https://stream.${domain}/${src}`,
         type: 'application/x-mpegurl',
       });
 
