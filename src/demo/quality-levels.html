@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 
-<head></head>
+<head>
+  <link rel="stylesheet" href="../../dist/index.css">
+</head>
 
 <body>
   <h1>Mux Video.js Kit</h1>
-
+  <script src="../../dist/index.js"></script>
+  
   <section>
     <h2>Quality Levels example</h2>
     <video id="mux-default" class="video-js vjs-16-9" controls preload="auto" width="100%"
       poster="https://image.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/thumbnail.jpg"
       data-setup='{
         "plugins": {
-          "httpSourceSelector": {}
+          "hlsQualitySelector": {}
         }
       }'>
       <source src="DS00Spx1CV902MCtPj5WknGlR102V5HFkDe" type="video/mux" />

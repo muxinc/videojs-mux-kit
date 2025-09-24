@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 import 'videojs-contrib-quality-levels';
-import 'videojs-http-source-selector';
+import 'videojs-hls-quality-selector';
 import './style/index.scss';
 
 import './tech/hlsjs';
@@ -48,6 +48,10 @@ videojs.use('video/mux', (player) => {
       if (player.mux && player.mux.addHLSJS) {
         setupMuxDataTracking(player);
       }
+
+      player.hlsQualitySelector({
+        displayCurrentQuality: true,
+      });
 
       if (typeof setupSubtitlesForPlayer !== 'undefined') {
         setupSubtitlesForPlayer(player);
