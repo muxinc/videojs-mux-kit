@@ -43,7 +43,20 @@ module.exports = async function(env) {
       ]
     },
     plugins: [
-      ...await buildHtmlWebpackConfigs()
+      ...await buildHtmlWebpackConfigs(),
+      {
+        apply: (compiler) => {
+          compiler.hooks.done.tap('DevServerMessagePlugin', (stats) => {
+            if (process.env.WEBPACK_DEV_SERVER) {
+              const port = process.env.PORT || 8080;
+              setTimeout(() => {
+                // eslint-disable-next-line no-console
+                console.log(`\n\x1b[1m\x1b[32m🚀  Dev server running on: \x1b[4mhttp://localhost:${port}\x1b[0m  🌐\n`);
+              }, 0);
+            }
+          });
+        }
+      }
     ]
   });
 };
