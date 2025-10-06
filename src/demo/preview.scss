@@ -1,13 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  text-align: center;
-}
-
-section {
-  margin: 4em auto;
-
-  max-width: 700px;
-}
-
-.video-js {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #111;
+  background-color: #fff;
+  padding: 2rem;
+  max-width: 800px;
   margin: 0 auto;
+  text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.6rem;
+}
+h4 {
+  font-size: 1.3rem;
+}
+h5 {
+  font-size: 1.1rem;
+}
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  max-width: 65ch;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+p.subtle {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+p.faint {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+a {
+  color: #0070f3; /* primary link color */
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+a:hover,
+a:focus {
+  color: #d6336c; /* accent on hover */
+  text-decoration: underline;
+}
+a:visited {
+  color: #4a148c; /* visited links */
+}
+
+ul,
+ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+li {
+  margin-bottom: 0.5rem;
+}
+
+blockquote {
+  border-left: 3px solid rgba(0, 0, 0, 0.1);
+  padding-left: 1rem;
+  color: rgba(0, 0, 0, 0.65);
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+pre,
+code {
+  font-family: 'Fira Code', monospace;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
 }
